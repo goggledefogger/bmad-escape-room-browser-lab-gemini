@@ -2,11 +2,21 @@
 	import { onMount } from 'svelte';
 	import '../app.css';
 	import Workbench from '$lib/components/Workbench.svelte';
-	import { puzzleBWord } from '$lib/stores/puzzle';
+	import { puzzleACode, puzzleBWord } from '$lib/stores/puzzle';
 	import { get } from 'svelte/store';
 
 	onMount(() => {
-		// Define the global helper function for Puzzle B
+		// New Puzzle A: The Welcome Console Message
+		const code = get(puzzleACode);
+		const message = `%cWelcome, Agent!\\n%cThe first code is: %c${code}`;
+		const styles = [
+			'color: cyan; font-size: 24px; font-weight: bold;',
+			'color: white; font-size: 16px;',
+			'color: yellow; font-size: 16px; font-family: monospace;'
+		];
+		console.log(message, ...styles);
+
+		// Puzzle B: The helper function (previously puzzle B)
 		(window as any).helperWord = () => {
 			const word = get(puzzleBWord);
 			console.log(`The secret word is: %c${word}`, 'color: cyan; font-size: 16px;');

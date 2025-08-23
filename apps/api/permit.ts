@@ -1,10 +1,14 @@
-import type { VercelRequest, VercelResponse } from '@vercel/node';
+import type { IncomingMessage, ServerResponse } from 'http';
 
-export default function handler(req: VercelRequest, res: VercelResponse) {
+export default function handler(req: IncomingMessage, res: ServerResponse) {
 	const pass = '370';
 	res.setHeader('X-PASS', pass);
-	res.status(200).json({
-		message: `Access permit processed. Check headers for details.`,
-		pass: pass // Also include in body for accessibility
-	});
+	res.setHeader('Content-Type', 'application/json');
+	res.writeHead(200);
+	res.end(
+		JSON.stringify({
+			message: `Access permit processed. Check headers for details.`,
+			pass: pass
+		})
+	);
 }

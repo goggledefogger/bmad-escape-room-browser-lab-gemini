@@ -20,15 +20,17 @@ The project brief for "The Browser Lab" outlines a clear problem: browser DevToo
 
 ### Functional
 - **FR1:** The application MUST present a single-scene web interface consisting of a main puzzle area, a collapsible "Coach" panel, and an "Exit Panel."
-- **FR2:** The application MUST include a CSS-based puzzle where a secret code is hidden by a CSS property that the user can disable.
-- **FR3:** The application MUST include a Console-based puzzle where a secret word is returned by calling a predefined global JavaScript function.
+- **FR2:** The application MUST display a stylized welcome message in the browser's developer console containing the first secret code.
+- **FR3:** The application MUST include a CSS-based puzzle where a secret word is obscured by having its `color` property match its background.
 - **FR4:** The application MUST include a Network-based puzzle where a secret code is found within the response header of a mock API request initiated by a button click.
-- **FR5:** The application MUST provide an in-game "Coach" panel that allows the user to solve all puzzles without using the browser's native DevTools.
-- **FR6:** The "Coach" panel MUST contain three tabs: a "Styles" inspector, a "Logs" console emulator, and a "Requests" network monitor.
-- **FR7:** The application MUST implement a progressive hint system for each puzzle, revealing hints after a set period of user inactivity.
-- **FR8:** All puzzle solutions (codes, words) MUST be randomized per session to prevent users from sharing direct answers.
-- **FR9:** The application MUST display a summary screen upon successful completion that recaps the skills learned.
-- **FR10:** The application MUST include an onboarding sequence that briefly explains the option to use native DevTools or the built-in Coach panel.
+- **FR5:** The `ExitPanel` MUST display three separate, labeled input fields for each of the puzzle solutions.
+- **FR6:** Each input field in the `ExitPanel` MUST provide immediate visual feedback (e.g., turning green) upon correct code entry.
+- **FR7:** The final "Unlock" button in the `ExitPanel` MUST only become enabled after all three codes are correctly entered.
+- **FR8:** The application MUST provide an in-game "Coach" panel that allows the user to solve all puzzles without using the browser's native DevTools.
+- **FR9:** The "Coach" panel MUST contain three tabs: a "Logs" console output, a "Styles" inspector, and a "Requests" network monitor.
+- **FR10:** All puzzle solutions (codes, words) MUST be randomized per session.
+- **FR11:** The application MUST display a summary screen upon successful completion.
+- **FR12:** The application MUST include an onboarding sequence that prompts the user to open the developer console as the first step.
 
 ### Non-Functional
 - **NFR1:** The application MUST be a single-page application (SPA) with no backend dependencies for its core logic, aside from serving initial files and a mock API endpoint.
@@ -69,12 +71,11 @@ The core application is a client-side SPA. The single network puzzle will be pow
 
 ### Testing Requirements: Unit + Integration
 - **Unit Tests:** For individual components and utility functions (e.g., the code randomizer).
-- **Integration/E2E Tests:** A small suite of end-to-end tests (using a tool like Playwright or Cypress) to validate the core puzzle flows from a user's perspective, including interactions with the Coach panel.
+- **Manual Testing:** The primary method for verifying user flows and puzzle interactions.
 
-## 5. Epic List
-
-- **Epic 1: Workbench Foundation & CSS Puzzle:** Establish the core application shell, UI layout, state management, and implement the complete CSS toggle puzzle, including the Coach panel's "Styles" tab and hint system.
-- **Epic 2: Console & Network Puzzles:** Implement the Console puzzle (including the "Logs" tab in the Coach) and the Network puzzle (including the "Requests" tab and mock API endpoint), along with their respective hint systems.
+### Epic List
+- **Epic 1: Workbench Foundation & Console Puzzle:** Establish the core application shell, UI layout, state management, and implement the initial console-based welcome puzzle.
+- **Epic 2: CSS & Network Puzzles:** Implement the CSS color-change puzzle and the Network header puzzle, including their respective "Coach" panel tabs and hint systems.
 - **Epic 3: Final Polish & Launch Readiness:** Implement the onboarding flow, the final success screen, analytics tracking, and conduct final QA testing to prepare for launch.
 
 ## 6. Next Steps

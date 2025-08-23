@@ -58,7 +58,7 @@ graph TD
 | State Management   | Svelte Stores| N/A     | For managing shared state across components    | Built-in, simple, and reactive state management solution.                |
 | API Style          | REST        | N/A     | For communication with the serverless backend  | Simple, well-understood standard for the single API endpoint needed.     |
 | Backend Language   | TypeScript  | ~5.3.3  | Primary language for the serverless function   | Consistent language across the stack, type safety.                     |
-| E2E Testing        | Playwright  | ~1.40.1 | For end-to-end testing of the user flow        | Robust, fast, and reliable for testing real browser interactions.      |
+| E2E Testing        | Manual      | N/A     | For end-to-end testing of the user flow        | Per user request, automated E2E tests will be omitted in favor of manual testing. |
 | Build Tool         | Vite        | ~5.0.12 | Frontend build tool and dev server             | Extremely fast, modern, and provides a great developer experience.       |
 | CI/CD              | GitHub Actions| N/A     | For continuous integration and deployment      | Tightly integrated with GitHub, easy to configure for Vercel deployments. |
 | CSS Framework      | Tailwind CSS| ~3.4.1  | For styling the application                    | Utility-first CSS for rapid, consistent, and maintainable styling.       |

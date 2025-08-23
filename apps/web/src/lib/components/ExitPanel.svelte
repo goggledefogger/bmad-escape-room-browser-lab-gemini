@@ -1,14 +1,15 @@
 <script lang="ts">
 	import {
 		lastRequest,
-		puzzleACode,
-		puzzleBRevealedWord,
-		puzzleBWord,
-		puzzleCCode
+		puzzleAInput,
+		puzzleASolved,
+		puzzleBInput,
+		puzzleBSolved,
+		puzzleCInput,
+		puzzleCSolved,
+		allPuzzlesSolved
 	} from '$lib/stores/puzzle';
-	import { get } from 'svelte/store';
 
-	let enteredCode = '';
 	let success = false;
 
 	async function requestAccess() {
@@ -25,39 +26,14 @@
 		});
 	}
 
-	function handleKeyPress(key: string) {
-		if (success) return;
-		if (key === 'clear') {
-			enteredCode = '';
-		} else if (enteredCode.length < 10) {
-			enteredCode += key;
-		}
-	}
-
-	function checkSolution() {
-		const solution = `${get(puzzleACode)}${get(puzzleBWord)}${get(puzzleCCode)}`;
-		const revealedWord = get(puzzleBRevealedWord);
-
-		// A small cheat for the user - if they solved puzzle B, we use the word.
-		// Otherwise, we check against the full code. This is a UX choice to guide them.
-		const finalSolution = revealedWord ? `${get(puzzleACode)}${revealedWord}${get(puzzleCCode)}` : solution;
-
-
-		if (enteredCode === finalSolution) {
+	function unlock() {
+		if ($allPuzzlesSolved) {
 			success = true;
-		} else {
-			// Add a shake animation on failure
-			const panel = document.getElementById('exit-panel');
-			panel?.classList.add('animate-shake');
-			setTimeout(() => {
-				panel?.classList.remove('animate-shake');
-				enteredCode = '';
-			}, 500);
 		}
 	}
 </script>
 
-<div id="exit-panel" class="bg-gray-700 p-6 rounded-lg shadow-md mt-8 w-64">
+<div id="exit-panel" class="bg-gray-700 p-6 rounded-lg shadow-md mt-8 w-80">
 	{#if success}
 		<div class="text-center">
 			<h3 class="text-2xl font-bold text-green-400">Access Granted!</h3>
@@ -65,50 +41,65 @@
 		</div>
 	{:else}
 		<h3 class="text-xl font-bold mb-4">Exit Panel</h3>
-		<button on:click={requestAccess} class="w-full bg-cyan-500 text-white px-4 py-2 rounded mb-4"
-			>Request Access</button
-		>
-		<div class="bg-gray-800 rounded p-2 text-right font-mono text-2xl h-12 mb-4">{enteredCode}</div>
-		<div class="grid grid-cols-3 gap-2">
-			{#each ['1', '2', '3', '4', '5', '6', '7', '8', '9'] as key}
-				<button on:click={() => handleKeyPress(key)} class="p-2 bg-gray-600 rounded">{key}</button>
-			{/each}
-			<button on:click={() => handleKeyPress('clear')} class="p-2 bg-gray-600 rounded col-span-1"
-				>C</button
-			>
-			<button on:click={() => handleKeyPress('0')} class="p-2 bg-gray-600 rounded">0</button>
+		<div class="space-y-4">
+			<div class="flex flex-col">
+				<label for="code-a" class="text-sm text-gray-400 mb-1">Console Code (3 digits)</label>
+				<input
+					id="code-a"
+					type="text"
+					bind:value={$puzzleAInput}
+					class="bg-gray-800 rounded p-2 text-center font-mono text-lg"
+					class:border-green-500={$puzzleASolved}
+					class:border-gray-600={!$puzzleASolved}
+					maxlength="3"
+				/>
+			</div>
+			<div class="flex flex-col">
+				<label for="code-b" class="text-sm text-gray-400 mb-1">Style Code (4 letters)</label>
+				<input
+					id="code-b"
+					type="text"
+					bind:value={$puzzleBInput}
+					class="bg-gray-800 rounded p-2 text-center font-mono text-lg uppercase"
+					class:border-green-500={$puzzleBSolved}
+					class:border-gray-600={!$puzzleBSolved}
+					maxlength="4"
+				/>
+			</div>
+			<div class="flex flex-col">
+				<label for="code-c" class="text-sm text-gray-400 mb-1">Network Code (3 digits)</label>
+				<button on:click={requestAccess} class="text-xs text-cyan-400 hover:underline mb-1"
+					>Make Request to get Code</button
+				>
+				<input
+					id="code-c"
+					type="text"
+					bind:value={$puzzleCInput}
+					class="bg-gray-800 rounded p-2 text-center font-mono text-lg"
+					class:border-green-500={$puzzleCSolved}
+					class:border-gray-600={!$puzzleCSolved}
+					maxlength="3"
+				/>
+			</div>
 		</div>
-		<button on:click={checkSolution} class="w-full bg-green-500 text-white px-4 py-2 rounded mt-4"
-			>Unlock</button
+		<button
+			on:click={unlock}
+			disabled={!$allPuzzlesSolved}
+			class="w-full bg-green-500 text-white px-4 py-2 rounded mt-6 disabled:bg-gray-600 disabled:cursor-not-allowed"
 		>
+			Unlock
+		</button>
 	{/if}
 </div>
 
 <style>
-	@keyframes shake {
-		10%,
-		90% {
-			transform: translate3d(-1px, 0, 0);
-		}
-
-		20%,
-		80% {
-			transform: translate3d(2px, 0, 0);
-		}
-
-		30%,
-		50%,
-		70% {
-			transform: translate3d(-4px, 0, 0);
-		}
-
-		40%,
-		60% {
-			transform: translate3d(4px, 0, 0);
-		}
+	input {
+		border: 2px solid transparent;
 	}
-
-	.animate-shake {
-		animation: shake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+	.border-green-500 {
+		border-color: #22c55e;
+	}
+	.border-gray-600 {
+		border-color: #4b5563;
 	}
 </style>

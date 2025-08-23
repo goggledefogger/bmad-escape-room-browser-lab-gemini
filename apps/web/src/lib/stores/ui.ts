@@ -1,5 +1,3 @@
-<script lang="ts">
-	import { writable } from 'svelte/store';
+import { writable } from 'svelte/store';
 
-	export const showOnboarding = writable(true);
-</script>
+export const showOnboarding = writable(true);

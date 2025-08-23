@@ -1,12 +1,16 @@
 <script lang="ts">
-	import { isVeilVisible, puzzleBRevealedWord, lastRequest } from '$lib/stores/puzzle';
+	import {
+		isNoteTextColorVisible,
+		puzzleBInput, // Corrected: Use puzzleBInput instead of puzzleBRevealedWord
+		lastRequest
+	} from '$lib/stores/puzzle';
 	import { writable } from 'svelte/store';
 
 	let command = '';
 	let output = writable<string[]>([]);
 
-	function toggleVeil() {
-		isVeilVisible.update((v) => !v);
+	function toggleNoteTextColor() {
+		isNoteTextColorVisible.update((v) => !v);
 	}
 
 	function executeCommand() {
@@ -15,7 +19,7 @@
 		if (command.trim() === 'window.helperWord()') {
 			const word = (window as any).helperWord();
 			output.update((o) => [...o, word]);
-			puzzleBRevealedWord.set(word);
+			puzzleBInput.set(word); // Corrected: Set the input store
 		} else {
 			output.update((o) => [...o, 'Command not found.']);
 		}
@@ -23,32 +27,12 @@
 	}
 </script>
 
-<div class="absolute right-0 top-0 h-full bg-gray-800 p-4 rounded-l-lg shadow-2xl w-80 flex flex-col">
+<div
+	class="absolute right-0 top-0 h-full bg-gray-800 p-4 rounded-l-lg shadow-2xl w-80 flex flex-col"
+>
 	<h3 class="text-xl font-bold mb-4">Coach Panel</h3>
 
 	<div class="flex-grow bg-gray-900 rounded p-2 space-y-4">
-		<!-- Styles Tab -->
-		<div>
-			<h4 class="font-bold text-cyan-400 mb-2">Styles</h4>
-			<div class="p-2 bg-gray-700 rounded">
-				<label class="flex items-center justify-between cursor-pointer">
-					<span class="font-mono text-sm">.veil</span>
-					<input
-						type="checkbox"
-						class="sr-only"
-						on:change={toggleVeil}
-						checked={$isVeilVisible}
-					/>
-					<div class="relative">
-						<div class="w-10 h-4 bg-gray-400 rounded-full shadow-inner"></div>
-						<div
-							class="dot absolute w-6 h-6 bg-white rounded-full shadow -left-1 -top-1 transition-transform"
-						></div>
-					</div>
-				</label>
-			</div>
-		</div>
-
 		<!-- Logs Tab -->
 		<div class="flex flex-col">
 			<h4 class="font-bold text-cyan-400 mb-2">Logs</h4>
@@ -68,6 +52,27 @@
 				/>
 				<button type="submit" class="bg-cyan-500 text-white px-4 py-1 rounded-r">Run</button>
 			</form>
+		</div>
+		<!-- Styles Tab -->
+		<div>
+			<h4 class="font-bold text-cyan-400 mb-2">Styles</h4>
+			<div class="p-2 bg-gray-700 rounded">
+				<label class="flex items-center justify-between cursor-pointer">
+					<span class="font-mono text-sm">.note-text</span>
+					<input
+						type="checkbox"
+						class="sr-only"
+						on:change={toggleNoteTextColor}
+						checked={$isNoteTextColorVisible}
+					/>
+					<div class="relative">
+						<div class="w-10 h-4 bg-gray-400 rounded-full shadow-inner"></div>
+						<div
+							class="dot absolute w-6 h-6 bg-white rounded-full shadow -left-1 -top-1 transition-transform"
+						></div>
+					</div>
+				</label>
+			</div>
 		</div>
 
 		<!-- Requests Tab -->

@@ -37,8 +37,8 @@ This segment includes students in coding bootcamps, computer science undergradua
 ## MVP Scope
 
 ### Core Features (Must Have)
-- **Puzzle A (CSS):** An element is visually obscured; the user must use the Inspector (or Coach) to toggle a CSS property (e.g., `display: none`) to reveal a code.
-- **Puzzle B (Console):** A hint on the page points to a global JavaScript function; the user must run it in the Console (or Coach) to get a secret word.
+- **Puzzle A (Console):** The user is instructed to open the DevTools Console, where a stylized welcome message contains the first secret code.
+- **Puzzle B (CSS):** An element has its text color matched to its background color, obscuring it. The user must use the Inspector (or Coach) to change the `color` property to reveal a secret word.
 - **Puzzle C (Network):** A button triggers a mock API call; the user must inspect the request in the Network tab (or Coach) to find a passcode in a response header.
 - **Progressive Hints:** A time-based, multi-step hint system for each puzzle.
 - **Session Randomization:** The codes and words for the puzzles are randomized on each page load to prevent trivial sharing of answers.

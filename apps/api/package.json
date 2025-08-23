@@ -1,8 +1,11 @@
 {
-  "name": "api",
-  "version": "1.0.0",
-  "private": true,
-  "devDependencies": {
-    "@vercel/node": "^5.3.13"
-  }
+	"name": "api",
+	"version": "1.0.0",
+	"private": true,
+	"scripts": {
+		"dev": "tsx watch ./local-server.ts"
+	},
+	"devDependencies": {
+		"@vercel/node": "^3.2.2"
+	}
 }
