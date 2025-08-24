@@ -343,3 +343,7 @@ Apply the advanced elicitation task after major sections to refine based on user
 - Documents technical debt, workarounds, and constraints honestly
 - For brownfield projects with PRD: Provides clear enhancement impact analysis
 - The goal is PRACTICAL documentation for AI agents doing real work
+
+### Future Puzzle Idea
+
+- Make the site scrollable far beyond what seems visible, with a hidden clue anchored at the very bottom of the page. This encourages players to discover that the document extends much further than expected.

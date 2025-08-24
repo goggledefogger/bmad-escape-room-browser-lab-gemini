@@ -5,6 +5,7 @@
 		lastRequest
 	} from '$lib/stores/puzzle';
 	import { writable } from 'svelte/store';
+	import { showCoachPanel } from '$lib/stores/ui';
 
 	let command = '';
 	let output = writable<string[]>([]);
@@ -28,9 +29,31 @@
 </script>
 
 <div
-	class="absolute right-0 top-0 h-full bg-gray-800 p-4 rounded-l-lg shadow-2xl w-80 flex flex-col"
+	class="absolute inset-0 z-20 flex h-full w-full flex-col bg-gray-800 p-4 shadow-2xl md:static md:h-full md:w-full md:rounded-l-lg"
 >
-	<h3 class="text-xl font-bold mb-4">Coach Panel</h3>
+	<div class="flex justify-between items-center mb-4">
+		<h3 class="text-xl font-bold">Coach Panel</h3>
+		<button
+			on:click={() => showCoachPanel.set(false)}
+			class="text-gray-500 hover:text-white"
+			aria-label="Close coach panel"
+		>
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				class="h-6 w-6"
+				fill="none"
+				viewBox="0 0 24 24"
+				stroke="currentColor"
+			>
+				<path
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					stroke-width="2"
+					d="M6 18L18 6M6 6l12 12"
+				/>
+			</svg>
+		</button>
+	</div>
 
 	<div class="flex-grow bg-gray-900 rounded p-2 space-y-4">
 		<!-- Logs Tab -->
