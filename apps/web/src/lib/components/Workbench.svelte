@@ -11,7 +11,7 @@
 {/if}
 
 <div
-	class="wb-container w-full max-w-5xl h-auto max-h-[98svh] md:max-h-[720px] bg-gray-800 rounded-lg shadow-2xl p-8 relative overflow-hidden"
+	class="wb-container w-full max-w-5xl h-auto max-h-[98svh] md:max-h-[720px] bg-gray-800 rounded-lg shadow-2xl p-8 relative overflow-y-auto"
 >
 	<div class="vh-compact">
 		<div class="wb-grid grid grid-cols-1 md:grid-cols-[1fr_auto] gap-8 h-full">
