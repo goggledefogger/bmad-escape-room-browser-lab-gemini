@@ -55,18 +55,16 @@
 		</button>
 	</div>
 
-	<div class="flex-grow bg-gray-900 rounded p-2 space-y-4">
+	<div class="flex flex-col flex-grow bg-gray-900 rounded p-2 gap-4">
 		<!-- Logs Tab -->
-		<div class="flex flex-col">
-			<h4 class="font-bold text-cyan-400 mb-2">Logs</h4>
-			<div
-				class="bg-black rounded p-2 font-mono text-sm text-green-400 overflow-y-auto h-24"
-			>
+		<div class="flex flex-col flex-grow min-h-0">
+			<h4 class="font-bold text-cyan-400 mb-2 flex-shrink-0">Logs</h4>
+			<div class="flex-grow bg-black rounded p-2 font-mono text-sm text-green-400 overflow-y-auto">
 				{#each $output as line}
 					<p>{line}</p>
 				{/each}
 			</div>
-			<form on:submit|preventDefault={executeCommand} class="flex mt-2">
+			<form on:submit|preventDefault={executeCommand} class="flex mt-2 flex-shrink-0">
 				<input
 					type="text"
 					bind:value={command}
@@ -77,7 +75,7 @@
 			</form>
 		</div>
 		<!-- Styles Tab -->
-		<div>
+		<div class="flex-shrink-0">
 			<h4 class="font-bold text-cyan-400 mb-2">Styles</h4>
 			<div class="p-2 bg-gray-700 rounded">
 				<label class="flex items-center justify-between cursor-pointer">
@@ -99,10 +97,10 @@
 		</div>
 
 		<!-- Requests Tab -->
-		<div class="flex flex-col flex-grow">
-			<h4 class="font-bold text-cyan-400 mb-2">Requests</h4>
+		<div class="flex flex-col flex-grow min-h-0">
+			<h4 class="font-bold text-cyan-400 mb-2 flex-shrink-0">Requests</h4>
 			<div
-				class="flex-grow bg-black rounded p-2 font-mono text-xs text-green-400 overflow-y-auto h-32"
+				class="flex-grow bg-black rounded p-2 font-mono text-xs text-green-400 overflow-y-auto"
 			>
 				{#if $lastRequest}
 					<div class="text-white">

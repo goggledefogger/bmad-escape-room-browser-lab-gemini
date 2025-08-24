@@ -33,7 +33,7 @@
 	}
 </script>
 
-<div id="exit-panel" class="bg-gray-700 p-3 md:p-6 rounded-lg shadow-md w-80 mx-auto md:mx-0">
+<div id="exit-panel" class="bg-gray-700 p-3 md:p-6 rounded-lg shadow-md w-full max-w-sm mx-auto md:mx-0">
 	{#if success}
 		<div class="text-center">
 			<h3 class="text-2xl font-bold text-green-400">Access Granted!</h3>

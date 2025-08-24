@@ -16,15 +16,15 @@
 	<div class="vh-compact">
 		<div class="wb-grid grid grid-cols-1 md:grid-cols-[1fr_auto] gap-8 h-full">
 		<!-- Main Content Column -->
-		<div class="flex flex-col min-w-0 h-full">
-			<div>
+		<div class="flex flex-col min-w-0 h-full overflow-y-auto">
+			<div class="flex-shrink-0">
 				<h1 class="wb-title text-3xl font-bold text-cyan-400 mb-6 flex-shrink-0">The Browser Lab</h1>
 				<div class="relative">
 					<StickyNote />
 				</div>
 			</div>
 
-			<div class="mt-auto flex-shrink-0 self-center md:self-end">
+			<div class="mt-auto flex-shrink-0 self-center md:self-end py-4">
 				<ExitPanel />
 			</div>
 		</div>
@@ -69,32 +69,33 @@
  </div>
 
 <style>
-@media (max-height: 800px) {
-	.wb-container { padding: 0.75rem !important; }
-	.wb-grid { gap: 0.75rem !important; }
-	.wb-title { margin-bottom: 0.5rem !important; }
-}
-@media (max-height: 700px) {
-	.wb-container { padding: 0.5rem !important; }
-	.wb-grid { gap: 0.5rem !important; }
-	.wb-title { margin-bottom: 0.25rem !important; }
-}
-@media (max-height: 760px) {
-	.vh-compact { transform: scale(0.92); transform-origin: center bottom; }
-}
-@media (max-height: 700px) {
-	.vh-compact { transform: scale(0.88); }
-}
-@media (max-height: 640px) {
-	.vh-compact { transform: scale(0.84); }
-}
-@media (max-height: 580px) {
-	.vh-compact { transform: scale(0.8); }
-	.wb-container { padding: 0.25rem !important; }
-	.wb-grid { gap: 0.25rem !important; }
-}
-@media (max-height: 540px) {
-	.wb-container { padding: 0rem !important; }
-	.wb-title { margin-bottom: 0.125rem !important; }
-}
+	.wb-container {
+		height: 100%;
+		max-height: 98svh;
+	}
+
+	@media (min-width: 768px) {
+		.wb-container {
+			max-height: 720px;
+		}
+	}
+
+	@media (max-height: 800px) {
+		.wb-container { padding: 0.75rem; }
+		.wb-grid { gap: 0.75rem; }
+		.wb-title { margin-bottom: 0.5rem; font-size: 1.75rem; }
+	}
+	@media (max-height: 700px) {
+		.wb-container { padding: 0.5rem; }
+		.wb-grid { gap: 0.5rem; }
+		.wb-title { margin-bottom: 0.25rem; font-size: 1.5rem; }
+	}
+	@media (max-height: 580px) {
+		.wb-container { padding: 0.25rem; }
+		.wb-grid { gap: 0.25rem; }
+	}
+	@media (max-height: 540px) {
+		.wb-container { padding: 0.125rem; }
+		.wb-title { margin-bottom: 0.125rem; }
+	}
 </style>
